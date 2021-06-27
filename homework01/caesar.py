@@ -4,7 +4,6 @@ import typing as tp
 def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     """
     Encrypts plaintext using a Caesar cipher.
-
     >>> encrypt_caesar("PYTHON")
     'SBWKRQ'
     >>> encrypt_caesar("python")
@@ -15,14 +14,21 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """
     ciphertext = ""
-    # PUT YOUR CODE HERE
+    lower_case_chars = 'abcdefghijklmnopqrstuvwxyz'
+    for ch in plaintext:
+        if ch.isalpha():
+            if ch.islower():
+                ciphertext += lower_case_chars[(lower_case_chars.index(ch) + shift) % len(lower_case_chars)]
+            else:
+                ciphertext += lower_case_chars[(lower_case_chars.index(ch.lower()) + shift) % len(lower_case_chars)].upper()
+        else:
+            ciphertext += ch
     return ciphertext
 
 
 def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     """
     Decrypts a ciphertext using a Caesar cipher.
-
     >>> decrypt_caesar("SBWKRQ")
     'PYTHON'
     >>> decrypt_caesar("sbwkrq")
@@ -33,7 +39,15 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    # PUT YOUR CODE HERE
+    lower_case_chars = 'abcdefghijklmnopqrstuvwxyz'
+    for ch in ciphertext:
+        if ch.isalpha():
+            if ch.islower():
+                plaintext += lower_case_chars[(lower_case_chars.index(ch) - shift) % len(lower_case_chars)]
+            else:
+                plaintext += lower_case_chars[(lower_case_chars.index(ch.lower()) - shift) % len(lower_case_chars)].upper()
+        else:
+            plaintext += ch
     return plaintext
 
 
